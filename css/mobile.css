@@ -1,0 +1,101 @@
+
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+/* Bottom navigation for mobile */
+@media(max-width:768px){
+  #app-header{height:56px;padding:0 0.75rem}
+  .logo-sub{display:none}
+  .logo-title{font-size:0.85rem}
+  #nav-links{
+    position:fixed;bottom:0;left:0;right:0;
+    background:rgba(5,13,26,0.97);
+    backdrop-filter:blur(20px);
+    border-top:1px solid rgba(212,168,71,0.25);
+    display:flex;justify-content:space-around;
+    padding:0.4rem 0 calc(0.4rem + env(safe-area-inset-bottom));
+    z-index:200;
+  }
+  .nav-btn{
+    flex-direction:column;gap:0.15rem;
+    padding:0.4rem 0.5rem;font-size:0.65rem;
+    border:none;min-width:48px;
+  }
+  .nav-label{display:block;font-size:0.6rem;line-height:1}
+  .nav-icon{font-size:1.2rem}
+  #main-content{padding:1rem 0.75rem 5rem;max-width:100%}
+  #app-footer{display:none}
+
+  /* Hero mobile */
+  .home-hero{padding:1.5rem 0.5rem 1rem}
+  .hero-title{font-size:1.6rem}
+  .hero-stats{gap:1.5rem}
+  .stat-num{font-size:1.5rem}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-secondary{text-align:center;padding:0.85rem}
+
+  /* Word cards mobile */
+  .words-grid{grid-template-columns:1fr}
+  .word-card{padding:1rem}
+  .word-ru{font-size:1.2rem}
+
+  /* Topics mobile */
+  .topics-grid{grid-template-columns:1fr 1fr;gap:0.75rem}
+  .topic-card{padding:1rem}
+  .topic-card-icon{font-size:1.8rem}
+  .topic-mini-card{padding:0.65rem 0.75rem}
+
+  /* Word detail mobile */
+  .detail-body{grid-template-columns:1fr}
+  .detail-ru{font-size:1.8rem}
+  .detail-header{padding:1.25rem}
+  .detail-actions{flex-wrap:wrap;gap:0.5rem}
+
+  /* Search mobile */
+  .search-input{font-size:0.95rem;padding:0.85rem 2.5rem 0.85rem 1rem}
+  .kb-row{gap:0.25rem}
+  .kb-key{padding:0.5rem 0.4rem;font-size:0.85rem;min-width:28px}
+  .kb-space{min-width:80px}
+  .qz-options{grid-template-columns:1fr}
+  .match-grid{grid-template-columns:1fr}
+
+  /* Flashcard mobile */
+  .fc-card{height:240px}
+  .fc-word{font-size:1.5rem}
+  .fc-controls{flex-wrap:nowrap;gap:0.5rem}
+  .fc-btn{flex:1;padding:0.6rem 0.5rem;font-size:0.82rem}
+  .fc-settings{flex-direction:column;gap:0.5rem}
+  .fc-settings label{flex-direction:row;align-items:center;justify-content:space-between}
+
+  /* Page headers mobile */
+  .page-header h2{font-size:1.25rem}
+}
+
+@media(max-width:380px){
+  .topics-grid{grid-template-columns:1fr}
+  .fc-card{height:220px}
+  .kb-key{padding:0.45rem 0.3rem;font-size:0.78rem;min-width:24px}
+}
+
+/* Touch improvements */
+@media(hover:none){
+  .word-card:hover{transform:none}
+  .btn-primary:hover{transform:none}
+  .topic-card:hover{transform:none}
+  .word-card:active{border-color:var(--gold-400);background:rgba(212,168,71,0.05)}
+  .topic-card:active{border-color:var(--gold-400)}
+  .fc-card:active .fc-inner:not(.flipped){transform:scale(0.98)}
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(212,168,71,0.3);border-radius:2px}
+
+/* Loading animation */
+.skeleton{
+  background:linear-gradient(90deg,var(--navy-800) 25%,var(--navy-700) 50%,var(--navy-800) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:6px;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}

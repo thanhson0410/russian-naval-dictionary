@@ -101,3 +101,38 @@ function fcRate(rating) {
   document.getElementById('fc-counter').textContent = `${fcState.index} / ${fcState.words.length}`;
   fcShow();
 }
+
+// === SWIPE SUPPORT FOR FLASHCARD ===
+function fcAddSwipe(){
+  const card = document.getElementById('fc-card');
+  if(!card) return;
+  let startX=0,startY=0;
+  card.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY},{passive:true});
+  card.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-startX;
+    const dy=e.changedTouches[0].clientY-startY;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50&&fcState.flipped){
+      if(dx>0) fcRate('easy');
+      else fcRate('hard');
+    } else if(Math.abs(dx)<10&&Math.abs(dy)<10&&!fcState.flipped){
+      fcFlip();
+    }
+  },{passive:true});
+}
+
+// Override fcShow to add swipe + stats
+const _fcShow = fcShow;
+window.fcShow = function(){
+  _fcShow();
+  setTimeout(fcAddSwipe, 50);
+  const statsEl = document.getElementById('fc-stats');
+  if(!statsEl && fcState.total>0){
+    const bar = document.getElementById('fc-bar');
+    if(bar){
+      const s = document.createElement('div');
+      s.id='fc-stats';s.className='fc-stats';
+      s.innerHTML=`<span class="fc-stat"><span class="fc-stat-dot dot-easy"></span>Dễ: ${fcState.correct}</span><span class="fc-stat"><span class="fc-stat-dot dot-hard"></span>Khó: ${fcState.total-fcState.correct}</span>`;
+      bar.parentNode.insertBefore(s,bar);
+    }
+  }
+};
